@@ -65,5 +65,15 @@ stage('Push to Artifact Registry') {
         '''
     }
 }
+        stage('Deploy to GKE') {
+    steps {
+        sh '''
+            kubectl set image deployment/shopping-app \
+            shopping-app=asia-south1-docker.pkg.dev/project-7e0ae7e5-dbc5-4c45-bc3/ecommerce-repo/shopping-app:${BUILD_NUMBER}
+
+            kubectl rollout status deployment/shopping-app
+        '''
+    }
+}
 }
 }
