@@ -36,6 +36,7 @@ pipeline {
             withSonarQubeEnv('Sonarqube-cloud') {
                 sh """
                     ${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.organization=graceprem \
                     -Dsonar.projectKey=GracePrem_shopping-app \
                     -Dsonar.sources=. \
                     -Dsonar.python.version=3
