@@ -28,17 +28,21 @@ pipeline {
         '''
     }
 }
-       stage('SonarQube Scan') {
+      stage('SonarQube Scan') {
     steps {
-        withSonarQubeEnv('Sonarqube-cloud') {
-            sh '''
-                sonar-scanner \
-                -Dsonar.projectKey=GracePrem_shopping-app \
-                -Dsonar.sources=. \
-                -Dsonar.python.version=3
-            '''
+        script {
+            def scannerHome = tool 'SonarQube-scanner'
+
+            withSonarQubeEnv('Sonarqube-cloud') {
+                sh """
+                    ${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=GracePrem_shopping-app \
+                    -Dsonar.sources=. \
+                    -Dsonar.python.version=3
+                """
+            }
         }
     }
-}
+
     }
 }
