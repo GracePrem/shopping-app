@@ -11,7 +11,7 @@ def home():
     </head>
 
     <body>
-        <h1>Welcome to GCP Shopping Store</h1>
+        <h1>Welcome to GCP Shopping Store-CI/CD Demo</h1>
 
         <h2>Products</h2>
 
