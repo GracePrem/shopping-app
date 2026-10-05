@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+tools {
+        sonarQube 'SonarQube-scanner'
+    }
     stages {
         stage('Checkout Test') {
             steps {
@@ -27,6 +29,18 @@ pipeline {
             . venv/bin/activate
             pytest -v test_app.py
         '''
+    }
+}
+       stage('SonarQube Scan') {
+    steps {
+        withSonarQubeEnv('SonarQube-cloud') {
+            sh '''
+                sonar-scanner \
+                -Dsonar.projectKey=GracePrem_shopping-app \
+                -Dsonar.sources=. \
+                -Dsonar.python.version=3
+            '''
+        }
     }
 }
     }
