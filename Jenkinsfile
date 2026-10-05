@@ -46,5 +46,24 @@ pipeline {
     }
 
 }
+        stage('Docker Build') {
+    steps {
+        sh '''
+        docker build -t shopping-app:${BUILD_NUMBER} .
+        '''
+    }
+}
+
+stage('Push to Artifact Registry') {
+    steps {
+        sh '''
+        docker tag shopping-app:${BUILD_NUMBER} \
+        asia-south1-docker.pkg.dev/project-7e0ae7e5-dbc5-4c45-bc3/ecommerce-repo/shopping-app:${BUILD_NUMBER}
+
+        docker push \
+        asia-south1-docker.pkg.dev/project-7e0ae7e5-dbc5-4c45-bc3/ecommerce-repo/shopping-app:${BUILD_NUMBER}
+        '''
+    }
+}
 }
 }
