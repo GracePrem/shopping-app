@@ -1,8 +1,5 @@
 pipeline {
     agent any
-tools {
-        sonarQube 'SonarQube-scanner'
-    }
     stages {
         stage('Checkout Test') {
             steps {
