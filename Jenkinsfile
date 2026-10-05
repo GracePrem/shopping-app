@@ -30,7 +30,7 @@ pipeline {
 }
        stage('SonarQube Scan') {
     steps {
-        withSonarQubeEnv('SonarQube-cloud') {
+        withSonarQubeEnv('Sonarqube-cloud') {
             sh '''
                 sonar-scanner \
                 -Dsonar.projectKey=GracePrem_shopping-app \
